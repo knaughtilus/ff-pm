@@ -1,0 +1,694 @@
+form {
+  width: 100%;
+}
+form .form-row {
+  display: flex;
+  gap: 8rem;
+}
+form .form-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+form .form-col p {
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+form input, form label, form select, form textarea {
+  font-family: komet;
+  display: block;
+  font-size: 1em;
+}
+form label.invisible {
+  opacity: 0;
+  visibility: hidden;
+  user-select: none;
+  pointer-events: none;
+}
+form select, form option {
+  background-color: var(--clr-dark);
+  color: var(--clr-white);
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+}
+form .form-group {
+  width: 100%;
+  position: relative;
+  margin-bottom: 3rem;
+}
+form .form-group input, form .form-group select {
+  all: unset;
+  box-sizing: border-box;
+  cursor: text;
+  width: 100%;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--clr-white);
+}
+form .form-group textarea {
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  color: var(--clr-white);
+  border: none;
+  border-bottom: 2px solid var(--clr-white);
+  height: 180px;
+  resize: vertical;
+}
+form .form-group textarea:focus, form .form-group textarea:focus-visible {
+  box-shadow: none;
+  outline: none;
+}
+form .form-group.floating-label label {
+  position: absolute;
+  left: 12px;
+  top: 8px;
+  cursor: text;
+  transform-origin: left center;
+  transition: all 0.25s ease-out;
+}
+form .form-group.floating-label ::placeholder {
+  opacity: 0;
+}
+form .form-group.floating-label:has(:focus) label, form .form-group.floating-label:not(:has(:placeholder-shown)) label {
+  translate: 0 -120%;
+  scale: 0.75;
+  color: var(--clr-primary);
+}
+form .form-group.floating-label:has(:focus) input, form .form-group.floating-label:has(:focus) textarea, form .form-group.floating-label:not(:has(:placeholder-shown)) input, form .form-group.floating-label:not(:has(:placeholder-shown)) textarea {
+  border-color: var(--clr-primary);
+}
+form .form-group.select {
+  position: relative;
+  cursor: pointer;
+}
+form .form-group.select::before {
+  content: "";
+  position: absolute;
+  top: 40%;
+  right: 1em;
+  display: block;
+  border: 6px solid transparent;
+  border-top-color: var(--clr-white);
+  z-index: 10;
+  transition: all 0.25s ease-out;
+  pointer-events: none;
+}
+form .form-group.select .active {
+  border-color: var(--clr-primary);
+}
+form .form-group.select:has(.active)::before {
+  border-top-color: var(--clr-primary);
+}
+form .form-group.select.fixed {
+  cursor: default;
+}
+form .form-group.select.fixed::before {
+  content: unset;
+}
+form .form-group.select.fixed select {
+  pointer-events: none;
+  color: #afafaf;
+  cursor: default;
+}
+form .form-group.file {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+form .form-group.file input[type=file] {
+  position: absolute;
+  appearance: none;
+  display: block;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+form .form-group.file label {
+  border: 2px dashed var(--clr-white);
+  padding: 1.25em 1.8em;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 2em;
+  white-space: no-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  font-weight: 800;
+  border-radius: 2em;
+  transition: scale 0.25s ease-out;
+}
+form .form-group.file label:hover {
+  scale: 1.02;
+}
+form .form-group.file label svg {
+  height: 4rem;
+  width: 4rem;
+  flex-shrink: 1;
+}
+form .form-group.file label svg.upload {
+  fill: var(--clr-white);
+  display: block;
+}
+form .form-group.file label svg.success {
+  fill: var(--clr-primary);
+  display: none;
+}
+form .form-group.file label .file-name {
+  flex: 1;
+}
+form .form-group.file label.active {
+  border-color: var(--clr-primary);
+}
+form .form-group.file label.active .upload {
+  display: none;
+}
+form .form-group.file label.active .success {
+  display: block;
+}
+form .form-group.date label {
+  position: absolute;
+  left: 12px;
+  top: 8px;
+  cursor: text;
+  transform-origin: left center;
+  transition: all 0.25s ease-out;
+}
+form .form-group.date input {
+  color: transparent;
+  transition: all 0.25s ease-out;
+}
+form .form-group.date.active label {
+  translate: 0 -120%;
+  scale: 0.75;
+  color: var(--clr-primary);
+}
+form .form-group.date.active input {
+  color: var(--clr-white);
+  border-color: var(--clr-primary);
+}
+form .form-group.descr {
+  margin-bottom: 0;
+}
+form input[type=submit] {
+  margin-top: auto;
+  cursor: pointer;
+}
+
+/* Variables */
+:root {
+  --clr-primary: #dfe82d;
+  --clr-white: #f8f8f8;
+  --clr-dark: #050c13;
+}
+
+html, *, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--clr-dark);
+  color: var(--clr-white);
+  font-family: komet, sans-serif;
+  font-weight: 500;
+  margin: 0;
+  font-size: 20px;
+  position: relative;
+  min-height: 100vh;
+  line-height: 1.4;
+}
+body > .container:nth-child(2) {
+  min-height: 100vh;
+  overflow: hidden;
+  padding-block-start: 80px;
+  padding-block-end: 100px;
+}
+
+.body-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: #050c13;
+  opacity: 1;
+  background-image: repeating-radial-gradient(circle at -8rem -8rem, transparent 0, #050c13 40px), repeating-linear-gradient(rgba(3, 9, 16, 0.3333333333), #030910);
+  background-size: cover;
+}
+
+/* Typography */
+a {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: var(--clr-white);
+}
+
+h1, h2 {
+  font-family: utopia-std-headline, serif;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 3.2em;
+  margin: 0;
+}
+
+h2 {
+  font-size: 2.75rem;
+}
+
+/* UTILITIES */
+.clr-primary {
+  color: var(--clr-primary);
+}
+
+/* Layout */
+.container {
+  max-width: 1800px;
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 1.2rem + 1.5vw, 3rem);
+}
+
+.header {
+  margin-block-start: 0;
+  margin-block-end: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.views {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+.views input {
+  appearance: none;
+  display: block;
+  width: 0;
+  height: 0;
+}
+.views label {
+  cursor: pointer;
+}
+.views svg {
+  fill: var(--clr-white);
+  height: 32px;
+}
+.views input:checked + label svg {
+  fill: var(--clr-primary);
+}
+
+.btn-primary {
+  display: block;
+  width: fit-content;
+  padding: 0.65em 1em;
+  border-radius: 10px;
+  font-weight: 800;
+  background-color: var(--clr-primary);
+  color: var(--clr-dark);
+  border: 2px solid var(--clr-primary);
+  transition: all 0.35s ease-out;
+}
+.btn-primary:hover {
+  color: var(--clr-primary);
+  background-color: var(--clr-dark);
+}
+.btn-secondary {
+  display: block;
+  width: fit-content;
+  padding: 0.65em 1em;
+  border-radius: 10px;
+  font-weight: 800;
+  color: var(--clr-primary);
+  border: 2px solid var(--clr-primary);
+  background-color: var(--clr-dark);
+  transition: all 0.35s ease-out;
+}
+.btn-secondary:hover {
+  color: var(--clr-white);
+  border-color: var(--clr-white);
+}
+.btn-delete {
+  position: relative;
+  display: block;
+  width: fit-content;
+  padding: 0;
+  border-radius: 10px;
+  font-weight: 800;
+  border: none;
+  color: var(--clr-white);
+  background-color: #e93838;
+  transition: all 0.35s ease-out;
+  overflow: hidden;
+  cursor: pointer;
+  font-size: 1em;
+  font-family: komet, sans-serif;
+}
+.btn-delete:hover {
+  background-color: #ad1414;
+}
+.btn-delete span {
+  position: relative;
+  display: block;
+  padding: 0.65em 1em;
+  z-index: 3;
+  transition: all 0.35s ease-out;
+}
+.btn-delete a {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  height: 100%;
+  width: 100%;
+  transition: all 0.35s ease-out;
+  translate: -100%;
+}
+.btn-delete.confirm {
+  background-color: #ad1414;
+}
+.btn-delete.confirm span {
+  translate: 100%;
+}
+.btn-delete.confirm a {
+  translate: 0;
+}
+.btn.ml-auto {
+  margin-inline-start: auto;
+}
+
+.banner-outer {
+  position: fixed;
+  left: 50%;
+  bottom: 3rem;
+  translate: -50%;
+  z-index: 50;
+  width: 100%;
+  transition: all 0.35s ease-out;
+}
+.banner-outer.fadeout {
+  translate: -50% 2rem;
+  opacity: 0;
+  visibility: hidden;
+}
+.banner-outer.newProject {
+  --banner-bg-color: palegreen;
+  --banner-border-color: #172b17;
+}
+.banner-outer.deletedProject {
+  --banner-bg-color: #f07878;
+  --banner-border-color: #3d1818;
+}
+.banner-outer.warning {
+  --banner-bg-color: #f3f16d;
+  --banner-border-color: #3d3d17;
+}
+.banner-inner {
+  background-color: var(--banner-bg-color);
+  color: var(--clr-dark);
+  padding: 1em;
+  border-radius: 1em;
+  border: 1px solid var(--banner-border-color);
+}
+
+.projects {
+  height: var(--projectsHeight);
+  transition: all 0.4s ease-out;
+  position: relative;
+}
+.projects .date {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  font-weight: 800;
+  margin-bottom: 3rem;
+}
+.projects .date p {
+  margin: 0;
+}
+.projects .button-wrapper {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.projects .error-404 {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50%;
+  width: min(100%, 900px);
+}
+.projects .error-404 h2 {
+  font-size: 2.75rem;
+}
+
+.project-wrapper {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 100px;
+  transition: all 0.5s ease-out;
+}
+.project-wrapper.active {
+  opacity: 1;
+  visibility: visible;
+  translate: 0;
+  transition-delay: 0.35s;
+}
+
+.project-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.project-cards .project-item {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  transition: all 0.35s ease-out;
+  overflow: hidden;
+  border-radius: 0.8em;
+}
+.project-cards .project-item:hover .project-image {
+  scale: 1.1;
+}
+.project-cards .project-item:hover .project-link {
+  color: var(--clr-primary);
+}
+.project-cards .project-item:hover .project-getinfo {
+  opacity: 1;
+}
+.project-cards .project-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: all 0.35s ease-out;
+}
+.project-cards .project-link {
+  position: absolute;
+  inset: auto 0 0 0;
+  backdrop-filter: blur(12px) brightness(70%) contrast(120%);
+  padding: 1.25em 1.5em;
+  font-size: 1.4em;
+  font-weight: 800;
+  z-index: 2;
+  transition: all 0.35s ease-out;
+}
+.project-cards .project-link::before {
+  content: "";
+  position: absolute;
+  inset: -100vmax;
+  z-index: 5;
+}
+.project-cards .project-getinfo {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: absolute;
+  top: -0.1em;
+  right: -0.1em;
+  z-index: 10;
+  opacity: 0;
+  transition: all 0.35s ease-out;
+  padding: 0.6em 0.85em 0.5em 0.75em;
+  background-color: var(--clr-dark);
+  border-bottom-left-radius: 30px;
+}
+.project-cards .project-getinfo svg {
+  transition: all 0.35s ease-out;
+}
+.project-cards .project-getinfo:hover svg {
+  fill: var(--clr-primary);
+}
+
+/* Project List */
+.project-list h2 {
+  font-size: 2rem;
+}
+.project-list .button-wrapper {
+  margin-bottom: 2rem;
+}
+.project-list .project-item {
+  padding-block: 1em;
+}
+.project-list .project-item.open .project-content {
+  grid-template-rows: 1fr;
+}
+.project-list .project-item.open .project-content-wrapper {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+.project-list .project-item.open .project-getinfo svg {
+  fill: var(--clr-primary);
+}
+.project-list .project-row {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+.project-list .project-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: all 0.3s ease-out;
+}
+.project-list .project-content-wrapper {
+  overflow: hidden;
+  padding-inline: 1em;
+  opacity: 0;
+  transition: all 0.3s ease-out;
+}
+.project-list .project-content-inner {
+  margin-top: 1em;
+}
+.project-list .project-content-inner > p:last-child {
+  margin-block-end: 0;
+  padding-block-end: 1em;
+}
+.project-list .project-link {
+  flex: 1 0 auto;
+  padding-inline: 1em;
+  font-weight: 800;
+  transition: all 0.35s ease-out;
+}
+.project-list .project-link:hover {
+  color: var(--clr-primary);
+}
+.project-list .project-getinfo {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  opacity: 1;
+  transition: all 0.35s ease-out;
+  flex: 0;
+  padding-inline: 1em;
+}
+.project-list .project-getinfo svg {
+  transition: all 0.35s ease-out;
+}
+.project-list .project-getinfo:hover svg {
+  fill: var(--clr-primary);
+}
+.project-list hr {
+  margin: 0;
+  border-style: solid;
+  border-color: lightgray;
+}
+.project-list hr:last-child {
+  display: none;
+}
+
+/* Modal */
+.dialog {
+  position: fixed;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  visibility: hidden;
+  transition: all var(--transition);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  z-index: 10000000000000;
+  color: var(--clr-white);
+  font-family: komet, sans-serif;
+  font-weight: 500;
+}
+.dialog.show, .dialog[open] {
+  visibility: visible;
+  opacity: 1;
+  padding: 0;
+  margin: 0;
+  max-width: unset;
+  max-height: unset;
+}
+.dialog.show .dialog-window, .dialog[open] .dialog-window {
+  translate: -50% 0;
+}
+.dialog-backdrop {
+  all: unset;
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+.dialog-window {
+  position: fixed;
+  top: 10vh;
+  left: 50%;
+  translate: -50% 10%;
+  width: min(90vw, 800px);
+  max-height: 80vh;
+  padding: 2em;
+  border: 2px solid var(--clr-primary);
+  border-radius: 1em;
+  background-color: var(--clr-dark);
+  z-index: 10;
+  font-size: 20px;
+}
+.dialog-window h2 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+.dialog-close {
+  position: absolute;
+  top: 0.75em;
+  right: 0.75em;
+  height: 3em;
+  width: 3em;
+  background-color: var(--clr-primary);
+  border-radius: 2em;
+  border: none;
+  cursor: pointer;
+}
+.dialog-close span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 60%;
+  height: 3px;
+  background-color: var(--clr-dark);
+  translate: -50% -50%;
+}
+.dialog-close span:first-child {
+  rotate: 45deg;
+}
+.dialog-close span:last-child {
+  rotate: -45deg;
+}
+.dialog-finish {
+  font-size: 1em;
+  margin-left: auto;
+  margin-top: 2em;
+}
+
+/*# sourceMappingURL=style.css.map */

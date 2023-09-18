@@ -1,0 +1,11 @@
+**/
+
+!_projectdata/
+_projectdata/*.*
+!_thumbnails/
+_thumbnails/*.*
+!_thumbnails/_placeholder.jpg
+!spyc/
+!spyc/**
+
+!**/.gitkeep
